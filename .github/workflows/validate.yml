@@ -1,0 +1,36 @@
+name: validate
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  project-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: 编译脚本
+        run: python -m py_compile scripts/ashare_fetch_bridge.py scripts/ashare_bottleneck_score.py
+      - name: 检查技能元数据
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          text = Path("SKILL.md").read_text(encoding="utf-8")
+          if not text.startswith("---\n"):
+              raise SystemExit("SKILL.md 缺少 YAML frontmatter")
+          _, frontmatter, _ = text.split("---", 2)
+          required = ["name: serenity-skill-ashare", "description:"]
+          missing = [item for item in required if item not in frontmatter]
+          if missing:
+              raise SystemExit(f"SKILL.md 元数据缺失: {missing}")
+          PY
+      - name: 检查脚本帮助和模板
+        run: |
+          python scripts/ashare_fetch_bridge.py --help
+          python scripts/ashare_bottleneck_score.py --help
+          python scripts/ashare_bottleneck_score.py --template

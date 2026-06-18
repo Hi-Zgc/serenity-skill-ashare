@@ -1,0 +1,38 @@
+name: 数据桥接问题
+description: 报告 ashare_fetch_bridge.py 或 a-share-intelligence 调用路径的问题
+title: "[数据桥接] "
+labels: ["data-bridge"]
+body:
+  - type: input
+    id: command
+    attributes:
+      label: 运行命令
+      placeholder: python scripts/ashare_fetch_bridge.py --source chain --method get_quote --symbol 600519
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 返回结果或错误摘要
+      description: 请脱敏，不要贴 cookie、token、账号或非公开信息。
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 运行环境
+      options:
+        - Windows PowerShell
+        - Windows CMD
+        - macOS/Linux shell
+        - GitHub Actions
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充信息
+      description: 例如 Python 版本、是否存在同级 a-share-intelligence、是否使用代理。
+    validations:
+      required: false

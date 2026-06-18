@@ -1,0 +1,37 @@
+name: 研究流程改进
+description: 提议调整 A 股产业链卡点方法、证据标准或输出结构
+title: "[研究流程] "
+labels: ["research-flow"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 当前问题
+      description: 说明现有流程在哪类 A 股问题上不够清楚或不够稳；如果涉及 Serenity 背景，请说明公开来源。
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: 示例请求或输出片段
+      description: 可以贴脱敏后的 prompt、输出结构或证据缺口。
+    validations:
+      required: false
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议修改
+      description: 说明应修改 SKILL.md、references 还是脚本。
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: 边界确认
+      options:
+        - label: 不包含买卖建议或收益承诺
+          required: true
+        - label: 不把 Serenity 或其他公开账号观点当成无需核验的事实
+          required: true
+        - label: 不包含私密数据、cookie、token 或非公开信息
+          required: true

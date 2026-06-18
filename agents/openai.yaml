@@ -1,0 +1,4 @@
+version: 1
+display_name: Serenity A股
+short_description: A股产业链卡点研究
+default_prompt: 使用 serenity-skill-ashare 研究一个 A 股主题或公司：先抓取 A 股数据，再排序产业链稀缺层级、比较候选公司，并说明证据缺口。
